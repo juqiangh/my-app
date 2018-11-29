@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import TodoItem from './TodoItem';
-import Test from  './Test';
+/*import Test from  './Test';*/
 import './style.css';
 
 class TodoList extends Component {
@@ -17,6 +17,34 @@ class TodoList extends Component {
         this.handleItemDelete = this.handleItemDelete.bind(this);
     }
 
+    componentWillMount() {
+        console.log('componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount');
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log('componentWillReceiveProps');
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log('shouldComponentUpdate');
+    }
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        console.log('componentWillUpdate');
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('componentDidUpdate');
+    }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+    }
+
     render() {
         return (
             <Fragment>
@@ -28,13 +56,14 @@ class TodoList extends Component {
                         className="input"
                         value={this.state.inputValue}
                         onChange={this.handleInputChange}
+                        ref={(input) => {this.input = input}}
                     />
                     <button onClick={this.handleBtnClick}>提交</button>
                 </div>
-                <ul>
+                <ul ref={(ul) => {this.ul = ul}}>
                     {this.getTodoItem()}
                 </ul>
-                <Test content={this.state.inputValue}/>
+                {/*<Test content={this.state.inputValue}/>*/}
             </Fragment>
         );
     }
@@ -59,7 +88,8 @@ class TodoList extends Component {
     }
 
     handleInputChange(e) {
-        const value = e.target.value;
+        /*const value = e.target.value;*/
+        const value = this.input.value;
         this.setState(() => ({
             inputValue: value
         }));
@@ -72,7 +102,9 @@ class TodoList extends Component {
         this.setState((prevState) => ({
             inputValue: '',
             list: [...prevState.list, prevState.inputValue]
-        }));
+        }), () => {
+            /*console.log(this.ul.querySelectorAll('div').length);*/
+        });
         /*this.setState({
             inputValue: '',
             list: [...this.state.list, this.state.inputValue]

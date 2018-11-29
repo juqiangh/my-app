@@ -9,11 +9,14 @@ class TodoItem extends Component {
 
     render() {
         const { content } = this.props ;
+        // JSX -> JS对象 -> 真实DOM
         return (
             <div onClick={this.handleClick}>
                 {content}
              </div>
         );
+        /*return <div><span>item</span></div>;
+        return React.createElement('div', {}, React.createElement('span', {}, 'item'));*/
     }
 
     handleClick() {
