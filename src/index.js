@@ -1,8 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import TodoList from './TodoList';
+/*import './index.css';*/
+/*import TodoList from './TodoList';*/
+/*import App from './App';*/
 import * as serviceWorker from './serviceWorker';
+import TodoList2 from "./TodoList2";
+import { Provider } from 'react-redux';
+import store from './store1';
 
-ReactDOM.render(<TodoList />, document.getElementById('root'));
+const App = (
+    <Provider store = {store}>
+        <TodoList2 />
+    </Provider>
+)
+
+ReactDOM.render(App, document.getElementById('root'));
 serviceWorker.unregister();
